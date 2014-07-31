@@ -1,0 +1,43 @@
+alias active="source venv/bin/activate"
+alias msp_ex="cd /opt/msp430-gcc-4.4.3/msp430/include/msp430/"
+alias codes="cd ~/codes/"
+alias godaddy="~/.connect"
+alias eagle5="/usr/bin/eagle"
+alias eagle7="/home/tejovanth/eagle-7.0.0/bin/eagle"
+alias git_init="git init && ~/dotfiles/gitcreate.sh"
+#alias todo="grep -r TODO app/* | awk -F':' '{gsub(/^[ \t]+/, "", $2);printf "%-30s %-30s\n",$1, $2}'"
+
+function todo {
+    g=`grep -r TODO app/*`
+    echo "$g" | awk -F':' '{gsub(/^[ \t]+/, "", $2);printf "%-30s %s\n",$1, $2}'
+}
+
+export PYTHONSTARTUP=.pythonrc.py
+
+function python {
+    if [ -d "./venv" ]; then
+        venv/bin/python $1
+    else
+        /usr/bin/python $1
+    fi
+}
+
+function set_project {
+    tech=`echo $PWD | cut -d'/' -f'5'`
+    ex=`grep -v "$tech" ~/.current_project`
+    echo $ex >| ~/.current_project
+    echo $PWD >> ~/.current_project
+}
+function load_project {
+    dir=`grep "$1" ~/.current_project`
+    cd $dir
+    active
+    todo
+}
+
+# Bash completion
+if [ -f /etc/bash_completion ]; then
+. /etc/bash_completion
+fi
+export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \$\[\033[00m\] '
+export GIT_PS1_SHOWDIRTYSTATE=1
