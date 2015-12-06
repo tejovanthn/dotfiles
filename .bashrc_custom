@@ -35,6 +35,16 @@ function load_project {
     todo
 }
 
+function eventosaur {
+    cd ~/codes/python/eventosaur/
+    source venv/bin/activate
+    if [ ! -z "$1" -a "$1" != " " ]; then
+	echo "eventosaur $@"
+        ./manage.py $@
+    fi 
+}
+
+
 # Bash completion
 if [ -f /etc/bash_completion ]; then
 . /etc/bash_completion
