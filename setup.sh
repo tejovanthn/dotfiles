@@ -41,6 +41,13 @@ else
     echo "HEROKU exists, not installing"
 fi
 
+if [ $(program_is_installed meld) == 0 ]; then
+    sudo apt-get install -y meld
+else 
+    echo "GIT exists, not installing"
+fi
+
+
 
 # git pull and install dotfiles as well
 cd $HOME

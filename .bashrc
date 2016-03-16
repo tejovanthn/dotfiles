@@ -69,9 +69,9 @@
 #  AND the user id is greater than 99, we're on the server, and set umask
 #  022 for easy collaborative editing.
 if [ "`id -gn`" == "`id -un`" -a `id -u` -gt 99 ]; then
-	umask 002
+    umask 002
 else
-	umask 022
+    umask 022
 fi
 
 # ---------------------------------------------------------
@@ -83,33 +83,33 @@ fi
 if [ "$PS1" ]; then
 
     if [ -x /usr/bin/tput ]; then
-      if [ "x`tput kbs`" != "x" ]; then # We can't do this with "dumb" terminal
-        stty erase `tput kbs`
-      elif [ -x /usr/bin/wc ]; then
-        if [ "`tput kbs|wc -c `" -gt 0 ]; then # We can't do this with "dumb" terminal
-          stty erase `tput kbs`
+        if [ "x`tput kbs`" != "x" ]; then # We can't do this with "dumb" terminal
+            stty erase `tput kbs`
+        elif [ -x /usr/bin/wc ]; then
+            if [ "`tput kbs|wc -c `" -gt 0 ]; then # We can't do this with "dumb" terminal
+                stty erase `tput kbs`
+            fi
         fi
-      fi
     fi
     case $TERM in
-	xterm*)
-		if [ -e /etc/sysconfig/bash-prompt-xterm ]; then
-			PROMPT_COMMAND=/etc/sysconfig/bash-prompt-xterm
-		else
-	    	PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"'
-		fi
-		;;
-	screen)
-		if [ -e /etc/sysconfig/bash-prompt-screen ]; then
-			PROMPT_COMMAND=/etc/sysconfig/bash-prompt-screen
-		else
-		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\033\\"'
-		fi
-		;;
-	*)
-		[ -e /etc/sysconfig/bash-prompt-default ] && PROMPT_COMMAND=/etc/sysconfig/bash-prompt-default
+        xterm*)
+            if [ -e /etc/sysconfig/bash-prompt-xterm ]; then
+                PROMPT_COMMAND=/etc/sysconfig/bash-prompt-xterm
+            else
+                PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"'
+            fi
+            ;;
+        screen)
+            if [ -e /etc/sysconfig/bash-prompt-screen ]; then
+                PROMPT_COMMAND=/etc/sysconfig/bash-prompt-screen
+            else
+                PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\033\\"'
+            fi
+            ;;
+        *)
+            [ -e /etc/sysconfig/bash-prompt-default ] && PROMPT_COMMAND=/etc/sysconfig/bash-prompt-default
 
-	    ;;
+            ;;
     esac
 
     # Bash eternal history
@@ -149,10 +149,10 @@ if [ "$PS1" ]; then
 
     if [ "x$SHLVL" != "x1" ]; then # We're not a login shell
         for i in /etc/profile.d/*.sh; do
-	    if [ -r "$i" ]; then
-	        . $i
-	    fi
-	done
+            if [ -r "$i" ]; then
+                . $i
+            fi
+        done
     fi
 fi
 
@@ -227,3 +227,4 @@ source ~/.bashrc_custom
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+

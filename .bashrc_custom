@@ -40,6 +40,9 @@ function eventosaur {
     source venv/bin/activate
     if [ ! -z "$1" -a "$1" != " " ]; then
 	echo "eventosaur $@"
+        if [ "$1" = "runserver" ] ; then
+            gulp live-reload&
+        fi
         ./manage.py $@
     fi 
 }
