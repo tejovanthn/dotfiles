@@ -207,7 +207,8 @@ exec compton -f
 exec_always ~/.screenlayout/disable-extention.sh
 exec --no-startup-id nm-applet
 
-bindsym $mod+shift+x exec i3lock --color "$bg-color"
+bindsym $mod+shift+x exec "~/.i3/scripts/fuzzylock.sh"
+exec xautolock -time 15 -locker '~/.i3/scripts/fuzzylock.sh' &
 
 # scrot & gimp - root
 # https://faq.i3wm.org/question/202/what-do-you-guys-use-for-printscreen.1.html
