@@ -175,6 +175,7 @@ alias cp="cp -i"
 set -o noclobber
 
 # 2.2) Listing, directories, and motion
+alias ls="ls --color"
 alias ll="ls -alrtF --color"
 alias la="ls -A"
 alias l="ls -CF"
@@ -187,14 +188,16 @@ alias md='mkdir'
 alias cl='clear'
 alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
+alias grep='grep --color'
+alias lgrep='grep --color --line-number'
 
 # 2.3) Text and editor commands
 export EDITOR='vim'
 export VISUAL='vim' 
 
 # 2.4) grep options
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='1;31' # green for matches
+#export GREP_OPTIONS='--color=auto'
+#export GREP_COLOR='1;31' # green for matches
 
 # 2.5) sort options
 # Ensures cross-platform sorting behavior of GNU sort.
@@ -223,7 +226,7 @@ export LC_ALL=POSIX
 
 ## Define any user-specific variables you want here.
 source ~/.bashrc_custom
-. /etc/profile.d/vte.sh
+#. /etc/profile.d/vte.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
