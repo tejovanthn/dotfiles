@@ -204,6 +204,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 exec google-chrome
 exec compton -f
+exec /opt/Telegram/Telegram
 exec_always ~/.screenlayout/disable-extention.sh
 exec --no-startup-id redshift-gtk
 exec --no-startup-id nm-applet
@@ -220,7 +221,8 @@ bindsym Print  exec scrot -e 'mv $f ~/Pictures/$f'
 
 # https://faq.i3wm.org/question/2498/ssh-sessions-in-i3.1.html
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
-exec --no-startup-id dropbox start
+# exec --no-startup-id dropbox start
+exec --no-startup-id rescuetime
 
 
 # Create Log out, Reboot, Poweroff bindings
@@ -244,3 +246,4 @@ mode "Exit (L)ogout, (S)uspend, (R)eboot, (P)oweroff" {
 }
 
 bindsym $mod+Shift+e mode "Exit (L)ogout, (S)uspend, (R)eboot, (P)oweroff"
+

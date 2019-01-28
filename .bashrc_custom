@@ -22,6 +22,11 @@ function python {
     fi
 }
 
+function archive {
+    rclone -cv copy ~/$1 s3:tejovanthn-dslr-photos/${1#Pictures/} & rclone -cv copy ~/$1 remote:$1 && fg
+}
+
+
 function set_project {
     tech=`echo $PWD | cut -d'/' -f'5'`
     ex=`grep -v "$tech" ~/.current_project`
@@ -39,7 +44,7 @@ function eventosaur {
     cd ~/codes/python/eventosaur/
     source venv/bin/activate
     if [ ! -z "$1" -a "$1" != " " ]; then
-	echo "eventosaur $@"
+        echo "eventosaur $@"
         if [ "$1" = "runserver" ] ; then
             gulp live-reload&
         fi
@@ -48,9 +53,39 @@ function eventosaur {
 }
 
 
+function split_folder {
+
+    N_FILES=${1:-100}
+    FILES=${2:-"*.NEF"}
+
+    let n=`ls -l $FILES | wc -l`;
+    let N=$n/$N_FILES;
+
+    let m=0
+    let M=0
+
+    for i in $FILES; do
+
+        let m=$m+1
+        if [ $m -gt $N_FILES ]; then
+            let m=0
+            let M=$M+1
+        fi
+
+        if [ ! -d "$M" ]; then
+            echo "Creating $M"
+            mkdir "$M"
+        fi
+
+        mv "$i" "$M"
+    done
+
+    echo "Done"
+}
+
 # Bash completion
 if [ -f /etc/bash_completion ]; then
-. /etc/bash_completion
+    . /etc/bash_completion
 fi
 export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \$\[\033[00m\] '
 export GIT_PS1_SHOWDIRTYSTATE=1

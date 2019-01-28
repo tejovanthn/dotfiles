@@ -229,5 +229,5 @@ source ~/.bashrc_custom
 #. /etc/profile.d/vte.sh
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="$PATH:/usr/local/heroku/bin"
 
